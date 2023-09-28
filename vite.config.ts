@@ -1,5 +1,5 @@
-import react from '@vitejs/plugin-react';
-import { defineConfig, PluginOption } from 'vite';
+import react from '@vitejs/plugin-react-swc';
+import { defineConfig } from 'vite';
 import checker from 'vite-plugin-checker';
 import svgrPlugin from 'vite-plugin-svgr';
 import viteTsconfigPaths from 'vite-tsconfig-paths';
