@@ -2,10 +2,12 @@ import './App.css';
 
 import { ApolloProvider } from '@apollo/client';
 import { CssBaseline, CssVarsProvider, GlobalStyles, Stack } from '@mui/joy';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import { gqlClient } from './core/api/graphql/client';
-import Search from './core/components/Search';
-import { ThemeModeToggle } from './core/components/ThemeModeToggle';
+import NavBar from './core/components/NavBar';
+import FavoritesPage from './core/pages/FavoritesPage';
+import Search from './core/pages/SearchPage';
 
 function App() {
   return (
@@ -21,6 +23,10 @@ function App() {
               width: '1em',
               height: '1em',
             },
+
+            '.activeNavLink': {
+              color: 'var(--joy-palette-primary-200)',
+            },
           }}
         />
         <ApolloProvider client={gqlClient}>
@@ -31,9 +37,15 @@ function App() {
             px={{ xs: 3, md: 6 }}
             overflow="auto"
           >
-            <ThemeModeToggle />
+            <BrowserRouter>
+              <NavBar />
 
-            <Search />
+              <Routes>
+                <Route path="/" element={<Navigate to="/search" />} />
+                <Route path="/search" element={<Search />} />
+                <Route path="/favorites" element={<FavoritesPage />} />
+              </Routes>
+            </BrowserRouter>
           </Stack>
         </ApolloProvider>
       </CssVarsProvider>

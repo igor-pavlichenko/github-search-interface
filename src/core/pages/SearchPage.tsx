@@ -8,7 +8,7 @@ import {
   SEARCH_REPOSITORIES,
   SearchRepositoriesResponse,
 } from '../api/graphql/searchRepositoriesQuery';
-import RepositoryCard from './RepositoryCard/RepositoryCard';
+import RepositoryCard from '../components/RepositoryCard/RepositoryCard';
 
 const Search = () => {
   const [inputValue, setInputValue] = useState('');
