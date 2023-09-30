@@ -7,8 +7,7 @@ import Heading from './Heading';
 type Props = { repo: Repository };
 
 const RepositoryCard = ({ repo }: Props) => {
-  const { owner, name, stargazerCount, primaryLanguage, description, repositoryTopics, updatedAt } =
-    repo;
+  const { repositoryTopics } = repo;
   return (
     <Sheet
       variant="outlined"
@@ -23,11 +22,7 @@ const RepositoryCard = ({ repo }: Props) => {
             </Chip>
           ))}
         </Stack>
-        <Footer
-          stargazerCount={stargazerCount}
-          primaryLanguage={primaryLanguage}
-          updatedAt={updatedAt}
-        />
+        <Footer repo={repo} />
       </Stack>
     </Sheet>
   );

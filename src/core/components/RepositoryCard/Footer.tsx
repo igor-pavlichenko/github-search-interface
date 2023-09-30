@@ -5,9 +5,12 @@ import { Repository } from '~/core/api/graphql/searchRepositoriesQuery';
 import PrimaryLanguage from './PrimaryLanguage';
 import StarsCount from './StarsCount';
 
-type Props = Pick<Repository, 'primaryLanguage' | 'stargazerCount' | 'updatedAt'>;
+type Props = {
+  repo: Repository;
+};
 
-const Footer = ({ primaryLanguage, stargazerCount, updatedAt }: Props) => {
+const Footer = ({ repo }: Props) => {
+  const { primaryLanguage, stargazerCount, updatedAt } = repo;
   return (
     <Grid
       container
