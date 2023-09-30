@@ -1,9 +1,11 @@
 import './App.css';
 
-import { Autocomplete, CssBaseline, CssVarsProvider, GlobalStyles, Sheet, Stack } from '@mui/joy';
-import { RxMagnifyingGlass } from 'react-icons/rx';
+import { ApolloProvider } from '@apollo/client';
+import { CssBaseline, CssVarsProvider, GlobalStyles, Sheet, Stack } from '@mui/joy';
 
-import { ThemeModeToggle } from './core/ThemeModeToggle';
+import { gqlClient } from './core/api/graphql/client';
+import Search from './core/components/Search';
+import { ThemeModeToggle } from './core/components/ThemeModeToggle';
 
 function App() {
   return (
@@ -21,25 +23,21 @@ function App() {
             },
           }}
         />
+        <ApolloProvider client={gqlClient}>
+          <Sheet variant="plain" sx={{ width: '100%', height: '100%', p: 2 }}>
+            <Stack
+              direction="column"
+              alignItems="center"
+              gap={4}
+              py={{ xs: 1, sm: 2, md: 3 }}
+              px={{ xs: 1, sm: 2, md: 4 }}
+            >
+              <ThemeModeToggle />
 
-        <Sheet variant="plain" sx={{ width: '100%', height: '100%', p: 2 }}>
-          <Stack
-            direction="column"
-            alignItems="center"
-            gap={4}
-            py={{ xs: 1, sm: 2, md: 3 }}
-            px={{ xs: 1, sm: 2, md: 4 }}
-          >
-            <ThemeModeToggle />
-
-            <Autocomplete
-              size="lg"
-              sx={{ width: { xs: '100%', sm: '600px' } }}
-              startDecorator={<RxMagnifyingGlass className="RadixIcon" />}
-              options={[]}
-            />
-          </Stack>
-        </Sheet>
+              <Search />
+            </Stack>
+          </Sheet>
+        </ApolloProvider>
       </CssVarsProvider>
     </CssBaseline>
   );
