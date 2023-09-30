@@ -23,10 +23,6 @@ function App() {
               width: '1em',
               height: '1em',
             },
-
-            '.activeNavLink': {
-              color: 'var(--joy-palette-primary-200)',
-            },
           }}
         />
         <ApolloProvider client={gqlClient}>
