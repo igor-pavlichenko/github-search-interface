@@ -25,7 +25,12 @@ const Heading = ({ repo }: Props) => {
       </Stack>
 
       <Grid xs={3} container justifyContent="flex-end" alignItems="baseline">
-        <Button variant="outlined" size="sm" startDecorator={<RxStar className="RadixIcon" />}>
+        <Button
+          color="neutral"
+          variant="outlined"
+          size="sm"
+          startDecorator={<RxStar className="RadixIcon" />}
+        >
           Favorite
         </Button>
       </Grid>

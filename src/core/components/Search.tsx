@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { Autocomplete } from '@mui/joy';
+import { Input } from '@mui/joy';
 import { RxMagnifyingGlass } from 'react-icons/rx';
 
 import {
@@ -23,11 +23,10 @@ const Search = () => {
 
   return (
     <>
-      <Autocomplete
+      <Input
         size="lg"
         sx={{ width: { xs: '100%', sm: '600px' } }}
         startDecorator={<RxMagnifyingGlass className="RadixIcon" />}
-        options={repos.map((r) => `${r.owner.login}/${r.name}`)}
       />
 
       {repos.map((repo) => (

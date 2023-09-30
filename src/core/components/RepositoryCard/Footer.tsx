@@ -4,6 +4,7 @@ import { Repository } from '~/core/api/graphql/searchRepositoriesQuery';
 
 import PrimaryLanguage from './PrimaryLanguage';
 import StarsCount from './StarsCount';
+import UpdatedOn from './UpdatedOn';
 
 type Props = {
   repo: Repository;
@@ -22,7 +23,7 @@ const Footer = ({ repo }: Props) => {
       <Grid>·</Grid>
       <StarsCount count={stargazerCount} />
       <Grid>·</Grid>
-      <Grid>{updatedAt}</Grid>
+      <UpdatedOn date={updatedAt} />
     </Grid>
   );
 };
