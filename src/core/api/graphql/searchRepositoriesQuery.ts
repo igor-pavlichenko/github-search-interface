@@ -21,8 +21,16 @@ export const SEARCH_REPOSITORIES = gql`
             name
             color
           }
+          repositoryTopics(first: 5) {
+            nodes {
+              topic {
+                name
+              }
+            }
+          }
           owner {
             login
+            avatarUrl
           }
           readme: object(expression: "master:README.md") {
             ... on Blob {
@@ -47,8 +55,16 @@ export type Repository = {
     name: string;
     color: string;
   };
+  repositoryTopics: {
+    nodes: Array<{
+      topic: {
+        name: string;
+      };
+    }>;
+  };
   owner: {
     login: string;
+    avatarUrl: string;
   };
   readme?: {
     text: string;
