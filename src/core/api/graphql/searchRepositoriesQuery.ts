@@ -51,7 +51,7 @@ export type Repository = {
   updatedAt: string;
   url: string;
   openGraphImageUrl: string;
-  primaryLanguage: {
+  primaryLanguage?: {
     name: string;
     color: string;
   };

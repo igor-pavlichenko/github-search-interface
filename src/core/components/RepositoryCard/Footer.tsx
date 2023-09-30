@@ -19,8 +19,12 @@ const Footer = ({ repo }: Props) => {
       alignItems="center"
       sx={{ color: ({ palette }) => palette.text.tertiary, fontSize: '0.7rem' }}
     >
-      <PrimaryLanguage primaryLanguage={primaryLanguage} />
-      <Grid>·</Grid>
+      {primaryLanguage && (
+        <>
+          <PrimaryLanguage primaryLanguage={primaryLanguage} />
+          <Grid>·</Grid>
+        </>
+      )}
       <StarsCount count={stargazerCount} />
       <Grid>·</Grid>
       <UpdatedOn date={updatedAt} />
