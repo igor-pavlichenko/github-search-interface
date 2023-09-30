@@ -1,7 +1,7 @@
 import './App.css';
 
 import { ApolloProvider } from '@apollo/client';
-import { CssBaseline, CssVarsProvider, GlobalStyles, Sheet, Stack } from '@mui/joy';
+import { CssBaseline, CssVarsProvider, GlobalStyles, Stack } from '@mui/joy';
 
 import { gqlClient } from './core/api/graphql/client';
 import Search from './core/components/Search';
@@ -24,19 +24,18 @@ function App() {
           }}
         />
         <ApolloProvider client={gqlClient}>
-          <Sheet variant="plain" sx={{ width: '100%', height: '100%', p: 2 }}>
-            <Stack
-              direction="column"
-              alignItems="center"
-              gap={4}
-              py={{ xs: 1, sm: 2, md: 3 }}
-              px={{ xs: 1, sm: 2, md: 4 }}
-            >
-              <ThemeModeToggle />
+          <Stack
+            direction="column"
+            alignItems="center"
+            gap={4}
+            py={{ xs: 3, md: 5 }}
+            px={{ xs: 3, md: 6 }}
+            overflow="auto"
+          >
+            <ThemeModeToggle />
 
-              <Search />
-            </Stack>
-          </Sheet>
+            <Search />
+          </Stack>
         </ApolloProvider>
       </CssVarsProvider>
     </CssBaseline>
