@@ -25,7 +25,6 @@ function App() {
         />
         <ApolloProvider client={gqlClient}>
           <Stack
-            direction="column"
             alignItems="center"
             gap={4}
             py={{ xs: 3, md: 5 }}

@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client';
-import { Input } from '@mui/joy';
-import { RxMagnifyingGlass } from 'react-icons/rx';
+import { Alert, Box, Input, LinearProgress, Stack } from '@mui/joy';
+import { useEffect, useState } from 'react';
+import { RxExclamationTriangle, RxMagnifyingGlass } from 'react-icons/rx';
 
 import {
   getSearchQuery,
@@ -10,28 +11,54 @@ import {
 import RepositoryCard from './RepositoryCard/RepositoryCard';
 
 const Search = () => {
-  // this would probably be better typed with codegen
-  const { data, loading, error, refetch } = useQuery<SearchRepositoriesResponse>(
+  const [inputValue, setInputValue] = useState('');
+  const [debouncedInputValue, setDebouncedInputValue] = useState('');
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+  };
+  useEffect(() => {
+    // kind of a react hack.. not a "real" debounce
+    const timeoutId = setTimeout(() => {
+      setDebouncedInputValue(inputValue);
+    }, 500);
+    return () => clearTimeout(timeoutId);
+  }, [inputValue]);
+
+  // ------ GraphQL request -----
+  // this would probably be better typed with codegen, but I couldn't make it work
+  const { data, previousData, loading, error } = useQuery<SearchRepositoriesResponse>(
     SEARCH_REPOSITORIES,
     {
-      // this would probably be better typed with codegen
-      variables: { searchQuery: getSearchQuery('prettier') },
+      skip: debouncedInputValue === '',
+      variables: { searchQuery: getSearchQuery(debouncedInputValue) },
     },
   );
-
-  const repos = data?.search.nodes ?? [];
+  const repos = (data || previousData)?.search.nodes ?? [];
 
   return (
     <>
-      <Input
-        size="lg"
-        sx={{ width: { xs: '100%', sm: '600px' } }}
-        startDecorator={<RxMagnifyingGlass className="RadixIcon" />}
-      />
+      <Stack sx={{ width: { xs: '100%', md: '750px' } }} gap="0.2rem">
+        <Input
+          size="lg"
+          startDecorator={<RxMagnifyingGlass className="RadixIcon" />}
+          onChange={handleInputChange}
+        />
+        <Box height="4px">
+          {loading && <LinearProgress size="sm" sx={{ width: '100%' }} variant="plain" />}
+        </Box>
+      </Stack>
 
-      {repos.map((repo) => (
-        <RepositoryCard key={repo.id} repo={repo} />
-      ))}
+      {error ? (
+        <Alert
+          color="danger"
+          variant="outlined"
+          startDecorator={<RxExclamationTriangle className="RadixIcon" />}
+        >
+          {error.message}
+        </Alert>
+      ) : (
+        repos.map((repo) => <RepositoryCard key={repo.id} repo={repo} />)
+      )}
     </>
   );
 };

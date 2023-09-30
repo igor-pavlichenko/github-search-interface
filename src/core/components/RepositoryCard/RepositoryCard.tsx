@@ -11,7 +11,7 @@ const RepositoryCard = ({ repo }: Props) => {
   return (
     <Sheet
       variant="outlined"
-      sx={{ width: { xs: '100%', sm: '600px' }, borderRadius: 5, padding: 2 }}
+      sx={{ width: { xs: '100%', md: '700px' }, borderRadius: 5, padding: 2 }}
     >
       <Stack gap="0.5rem" justifyContent="flex-start">
         <Heading repo={repo} />
