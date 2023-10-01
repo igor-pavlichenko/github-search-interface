@@ -1,27 +1,19 @@
-# React + TypeScript + Vite
+# Github Search Interface
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Prerequisites
 
-Currently, two official plugins are available:
+- latest stable Node.js (v20+)
+- pnpm (you can install it by running `npm i -g pnpm`)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Running the app
 
-## Expanding the ESLint configuration
+- clone the repo or download zip and extract it
+- in your terminal navigate to repo's folder
+- run the following commands
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+```
+pnpm i
+pnpm start
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- the app uses my GitHub token to query GitHub's GraphQL api, but if it expires and you start seeing a 401 error - you'll need to generate a basic token without any specific permissions here [https://github.com/settings/tokens?type=beta](https://github.com/settings/tokens?type=beta) and then use it to replace the expired token in `.env.development` file
