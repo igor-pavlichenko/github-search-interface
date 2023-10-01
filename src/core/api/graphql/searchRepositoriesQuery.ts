@@ -32,11 +32,6 @@ export const SEARCH_REPOSITORIES = gql`
             login
             avatarUrl
           }
-          readme: object(expression: "master:README.md") {
-            ... on Blob {
-              text
-            }
-          }
         }
       }
     }
@@ -65,9 +60,6 @@ export type Repository = {
   owner: {
     login: string;
     avatarUrl: string;
-  };
-  readme?: {
-    text: string;
   };
 };
 
