@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 import { Repository } from '../api/graphql/searchRepositoriesQuery';
 
@@ -10,21 +11,26 @@ interface FavoriteReposState {
   rateFavorite: (repository: Repository, rating: number) => void;
 }
 
-export const useFavoriteRepos = create<FavoriteReposState>()((set) => ({
-  favoriteRepos: [],
-  addFavorite: (repository) =>
-    set((state) => {
-      return { favoriteRepos: [{ id: repository.id, repository }, ...state.favoriteRepos] };
+export const useFavoriteRepos = create<FavoriteReposState>()(
+  persist(
+    (set) => ({
+      favoriteRepos: [],
+      addFavorite: (repository) =>
+        set((state) => ({
+          favoriteRepos: [{ id: repository.id, repository }, ...state.favoriteRepos],
+        })),
+      removeFavorite: (repository) =>
+        set((state) => ({
+          favoriteRepos: state.favoriteRepos.filter((repo) => repo.id !== repository.id),
+        })),
+      rateFavorite: (repository, rating) =>
+        set((state) => {
+          const newArray = [...state.favoriteRepos];
+          const index = newArray.findIndex((repo) => repo.id === repository.id);
+          newArray[index] = { id: repository.id, repository, rating };
+          return { favoriteRepos: newArray };
+        }),
     }),
-  removeFavorite: (repository) =>
-    set((state) => {
-      return { favoriteRepos: state.favoriteRepos.filter((repo) => repo.id !== repository.id) };
-    }),
-  rateFavorite: (repository, rating) =>
-    set((state) => {
-      const newArray = [...state.favoriteRepos];
-      const index = newArray.findIndex((repo) => repo.id === repository.id);
-      newArray[index] = { id: repository.id, repository, rating };
-      return { favoriteRepos: newArray };
-    }),
-}));
+    { name: 'favoriteReposStorage' }, // will persist in localStorage
+  ),
+);
