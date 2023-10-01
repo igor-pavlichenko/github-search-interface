@@ -1,7 +1,8 @@
 import { Button, Grid, Link, Stack, Typography } from '@mui/joy';
-import { RxStar } from 'react-icons/rx';
+import { RxStar, RxStarFilled } from 'react-icons/rx';
 
 import { Repository } from '~/core/api/graphql/searchRepositoriesQuery';
+import { useFavoriteRepos } from '~/core/state/favoriteRepos';
 
 type Props = {
   repo: Repository;
@@ -9,6 +10,11 @@ type Props = {
 
 const Heading = ({ repo }: Props) => {
   const { owner, name, description } = repo;
+  const { addFavorite, removeFavorite } = useFavoriteRepos();
+  const favoriteEntry = useFavoriteRepos((state) =>
+    state.favoriteRepos.find((fav) => fav.id === repo.id),
+  );
+  const isFavorite = !!favoriteEntry;
 
   return (
     <Grid container justifyContent="space-between" wrap="nowrap">
@@ -29,9 +35,12 @@ const Heading = ({ repo }: Props) => {
           color="neutral"
           variant="outlined"
           size="sm"
-          startDecorator={<RxStar className="RadixIcon" />}
+          startDecorator={
+            isFavorite ? <RxStarFilled className="RadixIcon" /> : <RxStar className="RadixIcon" />
+          }
+          onClick={() => (isFavorite ? removeFavorite(repo) : addFavorite(repo))}
         >
-          Favorite
+          {isFavorite ? 'Unfavorite' : 'Favorite'}
         </Button>
       </Grid>
     </Grid>
