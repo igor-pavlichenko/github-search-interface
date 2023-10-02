@@ -2,7 +2,7 @@ import './App.css';
 
 import { ApolloProvider } from '@apollo/client';
 import { CssBaseline, CssVarsProvider, GlobalStyles, Stack } from '@mui/joy';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { gqlClient } from './core/api/graphql/client';
 import NavBar from './core/components/NavBar';
@@ -37,8 +37,7 @@ function App() {
               <NavBar />
 
               <Routes>
-                <Route path="/" element={<Navigate to="/search" />} />
-                <Route path="/search" element={<Search />} />
+                <Route path="/" element={<Search />} />
                 <Route path="/favorites" element={<FavoritesPage />} />
               </Routes>
             </BrowserRouter>

@@ -7,7 +7,7 @@ const NavBar = () => {
   return (
     <Grid container sx={{ width: { xs: '100%', md: '750px' } }} justifyContent="start" gap={2}>
       <Grid>
-        <CustomNavLink to="/search">Search</CustomNavLink>
+        <CustomNavLink to="/">Search</CustomNavLink>
       </Grid>
       <Grid>
         <CustomNavLink to="/favorites">Favorites</CustomNavLink>
