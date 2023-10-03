@@ -1,5 +1,7 @@
 # Github Search Interface
 
+The app is deployed & live at [https://github-search-interface-jbwv.vercel.app/](https://github-search-interface-jbwv.vercel.app/) but if you want to run it locally, follow the instructions 👇
+
 ## Prerequisites
 
 - latest stable Node.js (v20+)
