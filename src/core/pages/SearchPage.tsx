@@ -49,6 +49,7 @@ const Search = () => {
           startDecorator={<RxMagnifyingGlass className="RadixIcon" />}
           value={inputValue}
           onChange={handleInputChange}
+          placeholder="Search GitHub repositories..."
         />
         <Box height="4px">
           {loading && <LinearProgress size="sm" sx={{ width: '100%' }} variant="plain" />}
