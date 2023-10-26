@@ -33,7 +33,12 @@ const FavoriteButton = ({ repo }: Props) => {
       >
         {isFavorite ? 'Unfavorite' : 'Favorite'}
       </Button>
-      <IconButton size="sm" variant="outlined" sx={{ display: { xs: 'inline-flex', sm: 'none' } }}>
+      <IconButton
+        size="sm"
+        variant="outlined"
+        sx={{ display: { xs: 'inline-flex', sm: 'none' } }}
+        onClick={() => (isFavorite ? removeFavorite(repo) : addFavorite(repo))}
+      >
         {isFavorite ? <RxStarFilled className="RadixIcon" /> : <RxStar className="RadixIcon" />}
       </IconButton>
     </>
